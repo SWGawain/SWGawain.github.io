@@ -87,24 +87,30 @@
 
 
 
-<meta name="description" content="在leetCode上刷题刷到的两个算法，在此做下笔记
-1. 链表求随机题目：有一个简单的链表，未知长度，很有可能特别长，无法全部加载在内存中，先需要一个算法，随机取出这个链表上的一个节点，要求取出每个节点的概率相等，给出算法及公式
-算法：蓄水池算法先把前k个数放入蓄水池，对第k+1，我们以k/(k+1)概率决定是否要把它换入蓄水池，换入时随机的选取一个作为替换项，这样一直做下去，对于任意的样本空间">
+<meta name="description" content="Set和Map1.HashSet和HashMapHashMap先说HashMap，特别常用的东西，允许null值和null键，不保证顺序，线程不安全
+底层还是由数组组成，数组中放入的是Entry对象，用键的hash值做散列算法决定数组下标，由Entry组成链表，即HashMap是一个数组和链表的结合体。
+
+HashMap初始数组容量16，0.75扩容系数
+1234/** * The default">
 <meta property="og:type" content="article">
-<meta property="og:title" content="更新两个算法Q&A">
-<meta property="og:url" content="http://swgawain.com/2017/02/11/twoAlgorithmQA/index.html">
+<meta property="og:title" content="java常用集合类（二）">
+<meta property="og:url" content="http://swgawain.com/2017/04/07/collection2/index.html">
 <meta property="og:site_name" content="一叶代码">
-<meta property="og:description" content="在leetCode上刷题刷到的两个算法，在此做下笔记
-1. 链表求随机题目：有一个简单的链表，未知长度，很有可能特别长，无法全部加载在内存中，先需要一个算法，随机取出这个链表上的一个节点，要求取出每个节点的概率相等，给出算法及公式
-算法：蓄水池算法先把前k个数放入蓄水池，对第k+1，我们以k/(k+1)概率决定是否要把它换入蓄水池，换入时随机的选取一个作为替换项，这样一直做下去，对于任意的样本空间">
-<meta property="og:image" content="http://my.csdn.net/uploads/201205/31/1338455236_7354.gif">
-<meta property="og:updated_time" content="2017-02-11T06:29:12.000Z">
+<meta property="og:description" content="Set和Map1.HashSet和HashMapHashMap先说HashMap，特别常用的东西，允许null值和null键，不保证顺序，线程不安全
+底层还是由数组组成，数组中放入的是Entry对象，用键的hash值做散列算法决定数组下标，由Entry组成链表，即HashMap是一个数组和链表的结合体。
+
+HashMap初始数组容量16，0.75扩容系数
+1234/** * The default">
+<meta property="og:image" content="http://wiki.jikexueyuan.com/project/java-collection/images/hashmap1.jpg">
+<meta property="og:updated_time" content="2017-04-07T10:00:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="更新两个算法Q&A">
-<meta name="twitter:description" content="在leetCode上刷题刷到的两个算法，在此做下笔记
-1. 链表求随机题目：有一个简单的链表，未知长度，很有可能特别长，无法全部加载在内存中，先需要一个算法，随机取出这个链表上的一个节点，要求取出每个节点的概率相等，给出算法及公式
-算法：蓄水池算法先把前k个数放入蓄水池，对第k+1，我们以k/(k+1)概率决定是否要把它换入蓄水池，换入时随机的选取一个作为替换项，这样一直做下去，对于任意的样本空间">
-<meta name="twitter:image" content="http://my.csdn.net/uploads/201205/31/1338455236_7354.gif">
+<meta name="twitter:title" content="java常用集合类（二）">
+<meta name="twitter:description" content="Set和Map1.HashSet和HashMapHashMap先说HashMap，特别常用的东西，允许null值和null键，不保证顺序，线程不安全
+底层还是由数组组成，数组中放入的是Entry对象，用键的hash值做散列算法决定数组下标，由Entry组成链表，即HashMap是一个数组和链表的结合体。
+
+HashMap初始数组容量16，0.75扩容系数
+1234/** * The default">
+<meta name="twitter:image" content="http://wiki.jikexueyuan.com/project/java-collection/images/hashmap1.jpg">
 
 
 
@@ -132,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://swgawain.com/2017/02/11/twoAlgorithmQA/"/>
+  <link rel="canonical" href="http://swgawain.com/2017/04/07/collection2/"/>
 
 
 
 
 
-  <title> 更新两个算法Q&A | 一叶代码 </title>
+  <title> java常用集合类（二） | 一叶代码 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -245,7 +251,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://swgawain.com/2017/02/11/twoAlgorithmQA/">
+  <link itemprop="mainEntityOfPage" href="http://swgawain.com/2017/04/07/collection2/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="清茶">
@@ -269,7 +275,7 @@
             
             
               
-                更新两个算法Q&A
+                java常用集合类（二）
               
             
           </h1>
@@ -284,8 +290,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T14:24:38+08:00">
-                2017-02-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-07T16:33:22+08:00">
+                2017-04-07
               </time>
             
 
@@ -320,14 +326,27 @@
       
 
       
-        <p>在leetCode上刷题刷到的两个算法，在此做下笔记</p>
-<h2 id="1-链表求随机"><a href="#1-链表求随机" class="headerlink" title="1. 链表求随机"></a>1. 链表求随机</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p>有一个简单的链表，未知长度，很有可能特别长，无法全部加载在内存中，先需要一个算法，随机取出这个链表上的一个节点，要求取出每个节点的概率相等，给出算法及公式</p>
-<h3 id="算法："><a href="#算法：" class="headerlink" title="算法："></a>算法：</h3><p><strong>蓄水池算法</strong><br>先把前k个数放入蓄水池，对第k+1，我们以k/(k+1)概率决定是否要把它换入蓄水池，换入时随机的选取一个作为替换项，这样一直做下去，对于任意的样本空间n，对每个数的选取概率都为k/n。也就是说对每个数选取概率相等。</p>
-<p><strong>证明：</strong> 第m个对象被选中的概率=选择m的概率 *（其后元素不被选择的概率+其后元素被选择的概率 * 不替换第m个对象的概率），即</p>
-<p><img src="http://my.csdn.net/uploads/201205/31/1338455236_7354.gif" alt=""></p>
-<h2 id="2-水桶有毒"><a href="#2-水桶有毒" class="headerlink" title="2. 水桶有毒"></a>2. 水桶有毒</h2><h3 id="题目：-1"><a href="#题目：-1" class="headerlink" title="题目："></a>题目：</h3><p>现有1000个水桶，其中有一个桶里的水有毒，猪喝了毒水之后，会在15分钟内死亡，请问1个小时内，如何用最少的猪，检验出哪桶水有毒</p>
-<h3 id="算法：-1"><a href="#算法：-1" class="headerlink" title="算法："></a>算法：</h3><p>将水桶的编号转换成二进制，最多10头猪15分钟就可以检测出<br>例：<br>1号桶，二进制表示为1，那么让1号猪喝水<br>2号桶，二进制表示为10，那么让2号猪喝水<br>…<br>500号桶，二进制表示为111110100，那么让3，5，6，7，8，9号猪喝水<br>…</p>
-<p>这样等15分钟以后，统计都有哪些猪被毒死了，比如3，5，6，7，8，9被毒死了，那么空位补零，得到111110100，反推出是500号桶里的水有毒</p>
+        <h2 id="Set和Map"><a href="#Set和Map" class="headerlink" title="Set和Map"></a>Set和Map</h2><h3 id="1-HashSet和HashMap"><a href="#1-HashSet和HashMap" class="headerlink" title="1.HashSet和HashMap"></a>1.HashSet和HashMap</h3><p><strong>HashMap</strong><br>先说HashMap，特别常用的东西，允许null值和null键，不保证顺序，线程不安全</p>
+<p>底层还是由数组组成，数组中放入的是Entry对象，用键的hash值做散列算法决定数组下标，由Entry组成链表，即HashMap是一个数组和链表的结合体。</p>
+<p><img src="http://wiki.jikexueyuan.com/project/java-collection/images/hashmap1.jpg" alt="导图可耻，我可耻。。"></p>
+<p>HashMap初始数组容量16，0.75扩容系数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * The default initial capacity - MUST be a power of two.</div><div class="line"> */</div><div class="line"> static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16</div></pre></td></tr></table></figure>
+<p>以上是HashMap中的源码，吐槽一句，还特么 1&lt;&lt;4 ，还特么 aka 16 ，这逼装的。。</p>
+<p>HashMap中但凡出现扩容，都会调用<code>resize()</code>方法，重新计算原数组在新数组中的位置，并把原数据放到新数组中，这是个非常大的性能消耗点，如果能预估HashMap的容量，尽量提前预设初始容量</p>
+<p><strong>HashSet</strong><br>我对HashSet的认识，一直就是。。<del>拿过来就用</del>。。。。不对，我也是有深刻认识的，嗯，是这样的</p>
+<p>HashSet底层是用HashMap实现的，源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Constructs a new, empty set; the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance has</div><div class="line"> * default initial capacity (16) and load factor (0.75).</div><div class="line"> */</div><div class="line">public HashSet() &#123;</div><div class="line">   map = new HashMap&lt;&gt;();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>HashSet初始化时，就顺便实例了一个HashMap，那么默认初始容量和扩容系数，自然就是跟hashMap一致了，当然也可以自己指定</p>
+<p>HashSet无序，不重复，线程不安全</p>
+<h3 id="2-LinkedHashSet和LinkedHashMap"><a href="#2-LinkedHashSet和LinkedHashMap" class="headerlink" title="2.LinkedHashSet和LinkedHashMap"></a>2.LinkedHashSet和LinkedHashMap</h3><p>这俩放一起，就是因为，HashSet和HashMap都是无序的，这俩都是有序的，可以记录插入的顺序，如果需要输出插入元素的顺序，可以用这俩</p>
+<h3 id="3-HashTable和ConcurrentHashMap"><a href="#3-HashTable和ConcurrentHashMap" class="headerlink" title="3.HashTable和ConcurrentHashMap"></a>3.HashTable和ConcurrentHashMap</h3><p>HashTable跟HashMap的主要区别在于，HashTable是线程安全的</p>
+<p>HashTable的初始容量是11，扩容系数是0.75</p>
+<p>HashTable不允许NULL</p>
+<p>HashTable的几乎所有public方法都是synchronized</p>
+<p>就是说，这东西死慢</p>
+<p>ConcurrentHashMap的出现，解决了HashTable慢的一笔的问题，同时还是线程安全的，这是如何做到的呢？</p>
+<p>可以这样理解，HashTable锁的全表，ConcurrentHashMap锁的是单页，也就是说，HashTable要锁，全部都等着，ConcurrentHashMap要锁，只封锁一小部分，剩余的不影响，那么，就目前看来，我个人倾向于直接将HashTable全部替换为ConcurrentHashMap，另外ConcurrentHashMap的初始容量是16，跟HashMap是一样的，也是得注意扩容问题</p>
+<h3 id="4-后记"><a href="#4-后记" class="headerlink" title="4.后记"></a>4.后记</h3><p>其实啊，我个人非常不喜欢在一个java服务里写多线程同步操作的东西，如果真要写了，也一般不会让多线程同时去增删改同一个资源，如果真的涉及到同一资源了，我也更倾向把它移到redis或者别的地方，而不是jvm内部去消化这个同步的过程，我们的访问量都在一天天的增大，用户要求的是速度，是快！而不是特么的让你写个多线程同步去等着，一个线程，快速处理，快速响应，真的涉及到这种操作同一资源的问题了，有的是别的方法，也有的是更快速更安全的操作方法，何必非要一棵树上吊死，最不济的情况，业务逻辑就真的不能调整吗？举个例子，RocketMq中，阿里取消掉了事务一致性，原因是加了事务会影响RocketMq的速度，那么一致性怎么保证？阿里给出的方案是，当你使用MQ的时候，你不应该去关注事务一直的问题，如果必须有，那也是你业务设计有问题</p>
 
       
     </div>
@@ -358,8 +377,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/10/howToBuildThis/" rel="next" title="如何搭建这个博客">
-                <i class="fa fa-chevron-left"></i> 如何搭建这个博客
+              <a href="/2017/04/07/core-java/" rel="next" title="java常用集合类（一）">
+                <i class="fa fa-chevron-left"></i> java常用集合类（一）
               </a>
             
           </div>
@@ -368,8 +387,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/14/Collection-Map/" rel="prev" title="Collection & Map">
-                Collection & Map <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/07/collection3/" rel="prev" title="java常用集合类（三）">
+                java常用集合类（三） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -479,7 +498,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-链表求随机"><span class="nav-number">1.</span> <span class="nav-text">1. 链表求随机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目："><span class="nav-number">1.1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法："><span class="nav-number">1.2.</span> <span class="nav-text">算法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-水桶有毒"><span class="nav-number">2.</span> <span class="nav-text">2. 水桶有毒</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目：-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法：-1"><span class="nav-number">2.2.</span> <span class="nav-text">算法：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set和Map"><span class="nav-number">1.</span> <span class="nav-text">Set和Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HashSet和HashMap"><span class="nav-number">1.1.</span> <span class="nav-text">1.HashSet和HashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LinkedHashSet和LinkedHashMap"><span class="nav-number">1.2.</span> <span class="nav-text">2.LinkedHashSet和LinkedHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-HashTable和ConcurrentHashMap"><span class="nav-number">1.3.</span> <span class="nav-text">3.HashTable和ConcurrentHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-后记"><span class="nav-number">1.4.</span> <span class="nav-text">4.后记</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -87,24 +87,19 @@
 
 
 
-<meta name="description" content="在leetCode上刷题刷到的两个算法，在此做下笔记
-1. 链表求随机题目：有一个简单的链表，未知长度，很有可能特别长，无法全部加载在内存中，先需要一个算法，随机取出这个链表上的一个节点，要求取出每个节点的概率相等，给出算法及公式
-算法：蓄水池算法先把前k个数放入蓄水池，对第k+1，我们以k/(k+1)概率决定是否要把它换入蓄水池，换入时随机的选取一个作为替换项，这样一直做下去，对于任意的样本空间">
+<meta name="description" content="1.ArrayList、LinkedList和VectorArrayList底层实现是一个数组，初始容量10，当数组存满时，自身保持1.5倍扩容，可以用ensureCapacity方法来主动增加容量，前提必须主动声明是ArrayList对象，而不是List对象
+12ArrayList list = new ArrayList&amp;lt;&amp;gt;();list.ensureCapacity(10);">
 <meta property="og:type" content="article">
-<meta property="og:title" content="更新两个算法Q&A">
-<meta property="og:url" content="http://swgawain.com/2017/02/11/twoAlgorithmQA/index.html">
+<meta property="og:title" content="java常用集合类（一）">
+<meta property="og:url" content="http://swgawain.com/2017/04/07/core-java/index.html">
 <meta property="og:site_name" content="一叶代码">
-<meta property="og:description" content="在leetCode上刷题刷到的两个算法，在此做下笔记
-1. 链表求随机题目：有一个简单的链表，未知长度，很有可能特别长，无法全部加载在内存中，先需要一个算法，随机取出这个链表上的一个节点，要求取出每个节点的概率相等，给出算法及公式
-算法：蓄水池算法先把前k个数放入蓄水池，对第k+1，我们以k/(k+1)概率决定是否要把它换入蓄水池，换入时随机的选取一个作为替换项，这样一直做下去，对于任意的样本空间">
-<meta property="og:image" content="http://my.csdn.net/uploads/201205/31/1338455236_7354.gif">
-<meta property="og:updated_time" content="2017-02-11T06:29:12.000Z">
+<meta property="og:description" content="1.ArrayList、LinkedList和VectorArrayList底层实现是一个数组，初始容量10，当数组存满时，自身保持1.5倍扩容，可以用ensureCapacity方法来主动增加容量，前提必须主动声明是ArrayList对象，而不是List对象
+12ArrayList list = new ArrayList&amp;lt;&amp;gt;();list.ensureCapacity(10);">
+<meta property="og:updated_time" content="2017-04-07T08:50:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="更新两个算法Q&A">
-<meta name="twitter:description" content="在leetCode上刷题刷到的两个算法，在此做下笔记
-1. 链表求随机题目：有一个简单的链表，未知长度，很有可能特别长，无法全部加载在内存中，先需要一个算法，随机取出这个链表上的一个节点，要求取出每个节点的概率相等，给出算法及公式
-算法：蓄水池算法先把前k个数放入蓄水池，对第k+1，我们以k/(k+1)概率决定是否要把它换入蓄水池，换入时随机的选取一个作为替换项，这样一直做下去，对于任意的样本空间">
-<meta name="twitter:image" content="http://my.csdn.net/uploads/201205/31/1338455236_7354.gif">
+<meta name="twitter:title" content="java常用集合类（一）">
+<meta name="twitter:description" content="1.ArrayList、LinkedList和VectorArrayList底层实现是一个数组，初始容量10，当数组存满时，自身保持1.5倍扩容，可以用ensureCapacity方法来主动增加容量，前提必须主动声明是ArrayList对象，而不是List对象
+12ArrayList list = new ArrayList&amp;lt;&amp;gt;();list.ensureCapacity(10);">
 
 
 
@@ -132,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://swgawain.com/2017/02/11/twoAlgorithmQA/"/>
+  <link rel="canonical" href="http://swgawain.com/2017/04/07/core-java/"/>
 
 
 
 
 
-  <title> 更新两个算法Q&A | 一叶代码 </title>
+  <title> java常用集合类（一） | 一叶代码 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -245,7 +240,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://swgawain.com/2017/02/11/twoAlgorithmQA/">
+  <link itemprop="mainEntityOfPage" href="http://swgawain.com/2017/04/07/core-java/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="清茶">
@@ -269,7 +264,7 @@
             
             
               
-                更新两个算法Q&A
+                java常用集合类（一）
               
             
           </h1>
@@ -284,8 +279,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T14:24:38+08:00">
-                2017-02-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-07T16:04:47+08:00">
+                2017-04-07
               </time>
             
 
@@ -320,14 +315,21 @@
       
 
       
-        <p>在leetCode上刷题刷到的两个算法，在此做下笔记</p>
-<h2 id="1-链表求随机"><a href="#1-链表求随机" class="headerlink" title="1. 链表求随机"></a>1. 链表求随机</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p>有一个简单的链表，未知长度，很有可能特别长，无法全部加载在内存中，先需要一个算法，随机取出这个链表上的一个节点，要求取出每个节点的概率相等，给出算法及公式</p>
-<h3 id="算法："><a href="#算法：" class="headerlink" title="算法："></a>算法：</h3><p><strong>蓄水池算法</strong><br>先把前k个数放入蓄水池，对第k+1，我们以k/(k+1)概率决定是否要把它换入蓄水池，换入时随机的选取一个作为替换项，这样一直做下去，对于任意的样本空间n，对每个数的选取概率都为k/n。也就是说对每个数选取概率相等。</p>
-<p><strong>证明：</strong> 第m个对象被选中的概率=选择m的概率 *（其后元素不被选择的概率+其后元素被选择的概率 * 不替换第m个对象的概率），即</p>
-<p><img src="http://my.csdn.net/uploads/201205/31/1338455236_7354.gif" alt=""></p>
-<h2 id="2-水桶有毒"><a href="#2-水桶有毒" class="headerlink" title="2. 水桶有毒"></a>2. 水桶有毒</h2><h3 id="题目：-1"><a href="#题目：-1" class="headerlink" title="题目："></a>题目：</h3><p>现有1000个水桶，其中有一个桶里的水有毒，猪喝了毒水之后，会在15分钟内死亡，请问1个小时内，如何用最少的猪，检验出哪桶水有毒</p>
-<h3 id="算法：-1"><a href="#算法：-1" class="headerlink" title="算法："></a>算法：</h3><p>将水桶的编号转换成二进制，最多10头猪15分钟就可以检测出<br>例：<br>1号桶，二进制表示为1，那么让1号猪喝水<br>2号桶，二进制表示为10，那么让2号猪喝水<br>…<br>500号桶，二进制表示为111110100，那么让3，5，6，7，8，9号猪喝水<br>…</p>
-<p>这样等15分钟以后，统计都有哪些猪被毒死了，比如3，5，6，7，8，9被毒死了，那么空位补零，得到111110100，反推出是500号桶里的水有毒</p>
+        <h3 id="1-ArrayList、LinkedList和Vector"><a href="#1-ArrayList、LinkedList和Vector" class="headerlink" title="1.ArrayList、LinkedList和Vector"></a>1.ArrayList、LinkedList和Vector</h3><p>ArrayList底层实现是一个数组，初始容量10，当数组存满时，自身保持1.5倍扩容，可以用ensureCapacity方法来主动增加容量，前提必须主动声明是ArrayList对象，而不是List对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ArrayList list = new ArrayList&lt;&gt;();</div><div class="line">list.ensureCapacity(10);    //主动增加list的容量</div></pre></td></tr></table></figure>
+<p>ArrayList最好事先可预知容量大小，并且在初始化的时候声明大小，例如，支付系统中的批量交易，一个批次的量基本是有定数的，200笔一个批次，那么此时最好在初始化时就声明200的容量，避免反复扩容浪费资源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ArrayList list = new ArrayList&lt;&gt;(200);</div></pre></td></tr></table></figure>
+<p><strong>LinkedList</strong><br>我们经常将ArrayList和LinkedList放在一起比较，这两个相比的优势劣势总结也是对一个初级人员最基本的考核。</p>
+<p><strong>ArrayList的底层实现是数组，LinkedList底层实现是链表</strong><br>所以ArrayList在随机访问方面的能力要更强，毕竟直接获取数组下标就可以拿到对应的元素，相反，在插入和删除操作时，由于数组结构需要下标重新排序，那么速度自然是比不过链表结构的LinkedLIst</p>
+<p>ArrayList查询快，LinkedList插入和删除快。</p>
+<p><strong>Vector</strong><br>跟ArrayList没啥太大区别，这个是同步的，ArrayList不是同步的，多线程操作时注意</p>
+<h3 id="2-Stack和PriorityQueue"><a href="#2-Stack和PriorityQueue" class="headerlink" title="2.Stack和PriorityQueue"></a>2.Stack和PriorityQueue</h3><p>讲真，这俩我不常用，主要看人面试题里有考的，唉…不常用也得常用了…</p>
+<p><strong>Stack</strong><br>Stack是集成了Vector的，是基于数组实现的线程安全的后进先出的对象堆栈</p>
+<p>这玩意，跟手枪的弹匣是一个道理，最后按入弹匣的，最先打出去</p>
+<p>常用方法有<br><code>peek()</code> 从栈顶取出第一个元素，并不删除<br><code>pop()</code>  从栈顶取出第一个元素，删掉<br><code>push()</code> 将一个元素推入栈顶<br>然后这个和Vector的初始容量都是10，扩容是翻倍，而不是ArrayList那样的1.5倍，相对的，这个就更占内存</p>
+<p><strong>PriorityQueue</strong><br>优先队列，这个就真没玩过了。</p>
+<p>允许<strong>非空</strong> <strong>可比较</strong>的对象</p>
+<p>常用的方法有<br><code>offer()</code> 增加一个元素<br><code>peek()</code>  取出栈顶一个元素不删除<br><code>poll()</code>  取出栈顶一个元素并删除掉</p>
 
       
     </div>
@@ -358,8 +360,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/10/howToBuildThis/" rel="next" title="如何搭建这个博客">
-                <i class="fa fa-chevron-left"></i> 如何搭建这个博客
+              <a href="/2017/02/14/Collection-Map/" rel="next" title="Collection & Map">
+                <i class="fa fa-chevron-left"></i> Collection & Map
               </a>
             
           </div>
@@ -368,8 +370,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/14/Collection-Map/" rel="prev" title="Collection & Map">
-                Collection & Map <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/07/collection2/" rel="prev" title="java常用集合类（二）">
+                java常用集合类（二） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -479,7 +481,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-链表求随机"><span class="nav-number">1.</span> <span class="nav-text">1. 链表求随机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目："><span class="nav-number">1.1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法："><span class="nav-number">1.2.</span> <span class="nav-text">算法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-水桶有毒"><span class="nav-number">2.</span> <span class="nav-text">2. 水桶有毒</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目：-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法：-1"><span class="nav-number">2.2.</span> <span class="nav-text">算法：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ArrayList、LinkedList和Vector"><span class="nav-number">1.</span> <span class="nav-text">1.ArrayList、LinkedList和Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Stack和PriorityQueue"><span class="nav-number">2.</span> <span class="nav-text">2.Stack和PriorityQueue</span></a></li></ol></div>
             
 
           </div>
